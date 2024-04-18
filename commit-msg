@@ -4,7 +4,7 @@
 # @version : 1.0#
 # Create a regex for a conventional commit.
 
-accepted_gitmoji="(👷|🔧|🚀|📄|✨|🐛|⚡️|♻️|⏪️|🎨|✅|🚧)"
+# accepted_gitmoji="(👷|🔧|🚀|📄|✨|🐛|⚡️|♻️|⏪️|🎨|✅|🚧)"
 commit_types="(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|wip)"
 conventional_commit_regex="${commit_types}(\([a-z \-]+\))?!?\\s*:\\s*.*\n*#[0-9]{3,}\n*.*$"
 
@@ -20,8 +20,8 @@ echo -e "\e[31mThe commit message does not meet the Conventional Commit standard
 echo "More details at: https://la-coding-factory.atlassian.net/wiki/spaces/~6412d793b05b4e3e7da95a33/pages/98992168/R+gle+hook+commit"
 echo "***********************************************************************"                                                                                                                                                        
 echo "Here are the  list of message type : ${commit_types}"                                                                                                                                                                           
-echo "Here are the  list of associated gitmoji : ${accepted_gitmoji}"                                                                                                                                                                           
-echo " <gitmoji> <type>: <subject> max 50char"
+# echo "Here are the  list of associated gitmoji : ${accepted_gitmoji}"                                                                                                                                                                           
+echo " <type>(scope?)!: <subject><task>"
 echo "***********************************************************************"
 
 exit 1
