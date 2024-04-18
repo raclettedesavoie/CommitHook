@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+#
+# @author : Mak Sophea
+# @version : 1.0#
+# Create a regex for a conventional commit.
+
+accepted_gitmoji="(👷|🔧|🚀|📄|✨|🐛|⚡️|♻️|⏪️|🎨|✅|🚧)"
+commit_types="(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|wip)"
+conventional_commit_regex="${commit_types}(\([a-z \-]+\))?!?\\s*:\\s*.*\n*#[0-9]{3,}\n*.*$"
+
+commit_message=$(cat "$1")
+# Check the message, if we match, all good baby.
+if [[ "$commit_message" =~ $conventional_commit_regex ]]; then
+   echo -e "\e[32mCommit message meets Conventional Commit standards...\e[0m"
+   exit 0
+fi
+
+# Uh-oh, this is not a conventional commit, show an example and link to the spec.
+echo -e "\e[31mThe commit message does not meet the Conventional Commit standard\e[0m"
+echo "More details at: https://la-coding-factory.atlassian.net/wiki/spaces/~6412d793b05b4e3e7da95a33/pages/98992168/R+gle+hook+commit"
+echo "***********************************************************************"                                                                                                                                                        
+echo "Here are the  list of message type : ${commit_types}"                                                                                                                                                                           
+echo "Here are the  list of associated gitmoji : ${accepted_gitmoji}"                                                                                                                                                                           
+echo " <gitmoji> <type>: <subject> max 50char"
+echo "***********************************************************************"
+
+exit 1
+
+
+# gitmoji=$(echo "$commit_message" | grep -oP "^${accepted_gitmoji}")
+# commit_type=$(echo "$commit_message" | grep -oP "$commit_types")
+
+# case $commit_type in
+#     "build" | "👷")
+#         expected_gitmoji="👷"
+#         ;;
+#     "chore" | "🔧")
+#         expected_gitmoji="🔧"
+#         ;;
+#     "ci" | "🚀")
+#         expected_gitmoji="🚀"
+#         ;;
+#     "docs" | "📄")
+#         expected_gitmoji="📄"
+#         ;;
+#     "feat" | "✨")
+#         expected_gitmoji="✨"
+#         ;;
+#     "fix" | "🐛")
+#         expected_gitmoji="🐛"
+#         ;;
+#     "perf" | "⚡️")
+#         expected_gitmoji="⚡️"
+#         ;;
+#     "refactor" | "♻️")
+#         expected_gitmoji="♻️"
+#         ;;
+#     "revert" | "⏪️")
+#         expected_gitmoji="⏪️"
+#         ;;
+#     "style" | "🎨")
+#         expected_gitmoji="🎨"
+#         ;;
+#     "test" | "✅")
+#         expected_gitmoji="✅"
+#         ;;
+#     "wip" | "🚧")
+#         expected_gitmoji="🚧"
+#         ;;
+#     *)
+
+#         expected_gitmoji=""
+#         ;;
+# esac
+
+# echo "gitmoji :${gitmoji}"
+# echo "${expected_gitmoji}"
+# if ! [[ "$gitmoji" =~ $expected_gitmoji ]] && [[  "$gitmoji" ]]; then
+#     echo -e "\e[31mErreur : Le Gitmoji ne correspond pas au type de commit\e[0m"
+#     exit 1
+# fi
